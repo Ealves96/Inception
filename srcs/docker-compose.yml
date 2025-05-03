@@ -1,0 +1,81 @@
+#version: '3'
+
+services:
+  nginx:
+      # Nom du conteneur NGINX
+      container_name: nginx
+      # Réseau auquel le conteneur appartient
+      networks:
+        - inception
+      # Indiquer que NGINX dépend de WordPress (ne démarre pas tant que WordPress n'est pas opérationnel)
+      depends_on:
+        - wordpress
+      # Redémarrer automatiquement le conteneur sauf s'il est arrêté manuellement
+      restart: unless-stopped
+      # Chemin du Dockerfile pour construire l'image
+      build:
+        context: requirements/nginx
+      # Fichier contenant les variables d'environnement
+      env_file:
+        - .env
+      # Mapper le port 443 du conteneur sur le port 443 de la machine locale
+      ports:
+        - "443:443"
+      volumes:
+         - wordpress:/var/www/wordpress
+
+  mariadb:
+    build:
+      context: ./requirements/mariadb
+    container_name: mariadb
+    env_file:
+      - .env
+    volumes:
+      - mariadb:/var/lib/mysql
+    expose:
+      - "3306"
+    networks:
+      - inception
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping --host=localhost -p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 1s
+      retries: 20
+      start_period: 5s
+
+  wordpress:
+    build:
+      context: ./requirements/wordpress
+    container_name: wordpress
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    env_file:
+      - .env
+    volumes:
+      - wordpress:/var/www/wordpress
+    restart: unless-stopped
+    expose:
+      - "9000"
+    networks:
+      - inception
+
+volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: "/home/ealves/data/wordpress"
+  mariadb:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: "/home/ealves/data/mariadb"
+
+
+networks:
+  inception:
+    name: inception
+    driver: bridge

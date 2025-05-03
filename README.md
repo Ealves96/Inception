@@ -11,27 +11,27 @@
 
 ## 🎓 Introduction
 
-Ce projet a pour but d'approfondir vos connaissances sur Docker et la virtualisation de services web. Vous allez mettre en place une mini-infrastructure composée de plusieurs conteneurs Docker, chacun dédié à un service spécifique, le tout orchestré via Docker Compose.
+Bienvenue sur mon projet Inception ! J'ai réalisé ce projet pour approfondir mes connaissances sur Docker et la virtualisation de services web. J'ai mis en place une mini-infrastructure composée de plusieurs conteneurs Docker, chacun dédié à un service spécifique, le tout orchestré via Docker Compose.
 
-## 📚 Objectifs pédagogiques
-- Comprendre et manipuler Docker, Docker Compose, les Dockerfiles et les réseaux Docker
-- Appliquer les bonnes pratiques de sécurité (TLS, variables d'environnement, secrets, etc.)
-- Automatiser le déploiement d'une stack web complète (WordPress, MariaDB, NGINX)
+## 📚 Ce que j'ai appris et mis en place
+- Manipulation avancée de Docker, Docker Compose, Dockerfiles et réseaux Docker
+- Application des bonnes pratiques de sécurité (TLS, variables d'environnement, secrets, etc.)
+- Automatisation du déploiement d'une stack web complète (WordPress, MariaDB, NGINX)
+- Gestion des volumes pour la persistance des données
+- Utilisation de Docker secrets et de fichiers .env pour la sécurité
 
-## ⚠️ Contraintes et bonnes pratiques
-- **Chaque service dans son propre conteneur** (NGINX, WordPress+PHP-FPM, MariaDB)
-- **Images construites à partir de l'avant-dernière version stable d'Alpine ou Debian**
-- **Un Dockerfile par service, écrit à la main**
-- **Pas d'images toutes faites (sauf Alpine/Debian)**
-- **Pas de hacky patchs** (`tail -f`, `sleep infinity`, etc. interdits)
-- **Utilisation obligatoire de variables d'environnement et de secrets**
-- **Pas de mot de passe en clair dans les Dockerfiles**
-- **Volumes pour la base de données et les fichiers WordPress**
-- **Nom de domaine personnalisé** (`login.42.fr`)
-- **NGINX unique point d'entrée (port 443, TLSv1.2/1.3)**
-- **Redémarrage automatique des conteneurs en cas de crash**
+## ⚠️ Contraintes et bonnes pratiques respectées
+- Chaque service tourne dans son propre conteneur (NGINX, WordPress+PHP-FPM, MariaDB)
+- Toutes les images sont construites à partir de l'avant-dernière version stable d'Alpine ou Debian
+- J'ai écrit un Dockerfile personnalisé pour chaque service
+- Aucun mot de passe n'est présent en clair dans les Dockerfiles
+- Les variables sensibles sont stockées dans des fichiers ignorés par git
+- Les volumes sont utilisés pour la base de données et les fichiers WordPress
+- Le nom de domaine personnalisé est configuré (`monlogin.42.fr`)
+- NGINX est le point d'entrée unique (port 443, TLSv1.2/1.3)
+- Les conteneurs redémarrent automatiquement en cas de crash
 
-## 🗂️ Structure du projet
+## 🗂️ Structure de mon projet
 
 ```
 Inception/
@@ -61,7 +61,7 @@ Inception/
 
 > ![Schéma d'architecture](./assets/architecture.png)
 >
-> _Placez ici le schéma fourni ou votre propre schéma dans le dossier `assets`._
+> _Voici le schéma de l'architecture que j'ai mise en place. Placez-le dans le dossier `assets` si besoin._
 
 - **DB** : Volume pour la base de données MariaDB
 - **WordPress** : Volume pour les fichiers du site
@@ -69,21 +69,21 @@ Inception/
 - **Réseau Docker** : Communication interne entre les conteneurs
 
 ## 🔑 Gestion des variables d'environnement & secrets
-- Toutes les variables sensibles (mots de passe, clés, etc.) doivent être stockées dans des fichiers ignorés par git (`.env`, `secrets/`)
+- Toutes les variables sensibles (mots de passe, clés, etc.) sont stockées dans des fichiers ignorés par git (`.env`, `secrets/`)
 - Exemple de `.env` :
   ```env
-  DOMAIN_NAME=login.42.fr
+  DOMAIN_NAME=monlogin.42.fr
   MYSQL_USER=xxxxxxx
   MYSQL_PASSWORD=xxxxxxx
   ...
   ```
-- Utilisez Docker secrets pour les informations confidentielles
+- J'utilise Docker secrets pour les informations confidentielles
 
 ## 🛠️ Installation
 
 1. Clonez le repository :
 ```bash
-git clone https://github.com/votre-username/Inception.git
+git clone https://github.com/mon-username/Inception.git
 cd Inception
 ```
 2. Placez vos fichiers secrets et variables d'environnement dans les dossiers appropriés
@@ -111,7 +111,7 @@ make
 
 ## 📝 Auteur
 
-- **Votre Nom** - [Votre GitHub](https://github.com/votre-username)
+- **Mon Nom** - [Mon GitHub](https://github.com/mon-username)
 
 ## 📄 Licence
 

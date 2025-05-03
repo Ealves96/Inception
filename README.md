@@ -22,12 +22,12 @@ Bienvenue sur mon projet Inception ! J'ai réalisé ce projet pour approfondir m
 
 ## ⚠️ Contraintes et bonnes pratiques respectées
 - Chaque service tourne dans son propre conteneur (NGINX, WordPress+PHP-FPM, MariaDB)
-- Toutes les images sont construites à partir de l'avant-dernière version stable d'Alpine ou Debian
+- Toutes les images sont construites à partir de l'avant-dernière version stable de Debian
 - J'ai écrit un Dockerfile personnalisé pour chaque service
 - Aucun mot de passe n'est présent en clair dans les Dockerfiles
 - Les variables sensibles sont stockées dans des fichiers ignorés par git
 - Les volumes sont utilisés pour la base de données et les fichiers WordPress
-- Le nom de domaine personnalisé est configuré (`monlogin.42.fr`)
+- Le nom de domaine personnalisé est configuré (`ealves.42.fr`)
 - NGINX est le point d'entrée unique (port 443, TLSv1.2/1.3)
 - Les conteneurs redémarrent automatiquement en cas de crash
 
@@ -59,25 +59,10 @@ Inception/
 
 ## 🖼️ Architecture
 
-> ![Schéma d'architecture](./assets/architecture.png)
->
-> _Voici le schéma de l'architecture que j'ai mise en place. Placez-le dans le dossier `assets` si besoin._
-
 - **DB** : Volume pour la base de données MariaDB
 - **WordPress** : Volume pour les fichiers du site
 - **NGINX** : Reverse proxy, point d'entrée unique (443)
 - **Réseau Docker** : Communication interne entre les conteneurs
-
-## 🔑 Gestion des variables d'environnement & secrets
-- Toutes les variables sensibles (mots de passe, clés, etc.) sont stockées dans des fichiers ignorés par git (`.env`, `secrets/`)
-- Exemple de `.env` :
-  ```env
-  DOMAIN_NAME=monlogin.42.fr
-  MYSQL_USER=xxxxxxx
-  MYSQL_PASSWORD=xxxxxxx
-  ...
-  ```
-- J'utilise Docker secrets pour les informations confidentielles
 
 ## 🛠️ Installation
 
@@ -108,12 +93,3 @@ make
   <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux"/>
   <img src="https://img.shields.io/badge/Make-000000?style=for-the-badge&logo=cmake&logoColor=white" alt="Make"/>
 </p>
-
-## 📝 Auteur
-
-- **Mon Nom** - [Mon GitHub](https://github.com/mon-username)
-
-## 📄 Licence
-
-Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.
-

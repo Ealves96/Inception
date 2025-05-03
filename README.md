@@ -1,6 +1,7 @@
-<h1> align="center"
- 🚀 Inception
-<\h1>
+<!-- Banner -->
+<h1 align="center">
+  🚀 Inception
+</h1>
 
 Ce projet est une infrastructure Docker qui met en place un environnement de développement web complet avec WordPress et MariaDB.
 
